@@ -14,6 +14,8 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @Configuration
 @EnableWebSecurity
 public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
+	
+	private ImprlementacaoUserDetailService implImprlementacaoUserDetailService;
 
 	@Override // configura as solicitações de acesso por http
 	protected void configure(HttpSecurity http) throws Exception {
@@ -29,9 +31,14 @@ public class WebConfigSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override // cria autenticação com o banco de dados ou em memoria
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+		
+		/*auth.userDetailsService(implementacaoUserDetailService)
+		.passwordEncoder(NoOpPasswordEncoder.getInstance());*/
+		
 
 		auth.inMemoryAuthentication().passwordEncoder(NoOpPasswordEncoder.getInstance()).withUser("patricia")
 				.password("1234").roles("ADMIN");
+		
 
 	}
 
